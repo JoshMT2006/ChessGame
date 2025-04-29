@@ -21,18 +21,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         //creates chess board
-        GridPane grid = new GridPane();
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int col = 0; col < BOARD_SIZE; col++) {
-                Rectangle square = new Rectangle(TILE_SIZE, TILE_SIZE);
-                if ((row + col) % 2 == 0) {
-                    square.setFill(Color.TAN);
-                } else {
-                    square.setFill(Color.BLACK);
-                }
-                grid.add(square, col, row);
-            }
-        }
+        ChessBoard chessBoard = new ChessBoard();
+
         //user and computer side labels
         Label playerSide = new Label("Player Side");
         playerSide.setStyle("-fx-background-color: rgba(51,90,119,0.38); -fx-padding: 20px;");
@@ -43,7 +33,7 @@ public class HelloApplication extends Application {
         //setting container for chess board
         VBox chessBoardContainer = new VBox();
         chessBoardContainer.setAlignment(Pos.CENTER);
-        chessBoardContainer.getChildren().add(grid);
+        chessBoardContainer.getChildren().add(chessBoard.CreateBoard());
 
         HBox BoardGUI = new HBox();
         BoardGUI.getChildren().addAll(computerSide,chessBoardContainer,playerSide);
