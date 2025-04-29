@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    private static final int TILE_SIZE = 80;
-    private static final int BOARD_SIZE = 8;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,7 +25,13 @@ public class HelloApplication extends Application {
         Label playerSide = new Label("Player Side");
         playerSide.setStyle("-fx-background-color: rgba(51,90,119,0.38); -fx-padding: 20px;");
         Label computerSide = new Label("Computer Side");
-        computerSide.setStyle("-fx-background-color: #602626; -fx-padding: 20px;");
+        computerSide.setStyle("-fx-background-color: #807676; -fx-padding: 20px;");
+
+
+
+
+
+
 
 
         //setting container for chess board
@@ -41,7 +45,6 @@ public class HelloApplication extends Application {
         stage.setScene(new Scene(BoardGUI));
         stage.show();
 
-        //Drag and drop for piece movements
 
     }
 

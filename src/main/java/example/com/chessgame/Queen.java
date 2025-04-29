@@ -15,8 +15,5 @@ public class Queen extends pieces {
         return Math.abs(initalX-finalX) == Math.abs(initalY-finalY) ||
                 initalX == finalX || initalY == finalY;
     }
-    @Override
-    public String toString() {
-        return isWhite ? "Q" : "q";
-    }
+
 }

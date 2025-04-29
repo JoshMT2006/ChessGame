@@ -16,6 +16,4 @@ public abstract class pieces {
 
     public abstract boolean validMove(int initalX , int initalY, int finalX , int finalY);
 
-    public abstract String toString();
-
 }

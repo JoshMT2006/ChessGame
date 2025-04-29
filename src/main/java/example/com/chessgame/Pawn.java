@@ -22,9 +22,4 @@ public class Pawn extends pieces {
 
         return (finalX == initialX) && (finalY == initialY + direction);
     }
-    @Override
-    public String toString() {
-        return isWhite ? "P" : "p";
-    }
-
 }

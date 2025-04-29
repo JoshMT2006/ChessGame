@@ -8,15 +8,16 @@ public class Bishop extends pieces {
     }
     @Override
     public Image getImage(){
-        return null;
+        if (isWhite) {
+            return new Image(getClass().getResourceAsStream("/images/WhiteRook.png"));
+        } else {
+            return new Image(getClass().getResourceAsStream("/images/BlackRook.png"));
+        }
     }
 
     @Override
     public boolean validMove(int initalX, int initalY, int finalX, int finalY) {
         return Math.abs(initalX-finalX) == Math.abs(initalY-finalY);
     }
-    @Override
-    public String toString() {
-        return isWhite ? "B" : "b";
-    }
+
 }
