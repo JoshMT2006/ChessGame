@@ -1,8 +1,14 @@
 package example.com.chessgame;
 
+import javafx.scene.image.Image;
+
 public class Knight extends pieces {
     public Knight (boolean isWhite) {
         super(isWhite);
+    }
+    @Override
+    public Image getImage(){
+        return null;
     }
     @Override
     public boolean validMove(int initalX, int initalY, int finalX, int finalY) {

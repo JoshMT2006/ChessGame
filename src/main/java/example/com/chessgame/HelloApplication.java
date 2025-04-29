@@ -41,9 +41,6 @@ public class HelloApplication extends Application {
         stage.setScene(new Scene(BoardGUI));
         stage.show();
 
-
-
-
         //Drag and drop for piece movements
 
     }
