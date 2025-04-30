@@ -20,54 +20,51 @@ public class ChessBoard {
                 square.setFill((row + col) % 2 == 0 ? Color.BEIGE : Color.TAN);
                 tile.getChildren().add(square);
 
-                // Place Black Pawns
-                if (row == 1) {
-                    Pawn blackPawn = new Pawn(false);
-                    ImageView pieceImage = createPieceImage(blackPawn);
-                    int finalRow = row;
-                    int finalCol = col;
-                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
-                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
-                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
-                    tile.getChildren().add(pieceImage);
-                }
-
-                // Place White Pawns
-                if (row == 6) {
-                    Pawn whitePawn = new Pawn(true);
-                    ImageView pieceImage = createPieceImage(whitePawn);
-                    int finalRow = row;
-                    int finalCol = col;
-                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
-                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
-                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
-                    tile.getChildren().add(pieceImage);
-                }
-
-                // Place Rooks
-                if ((row == 0 && col == 0) || (row == 0 && col == 7)) {
-                    Rook rook = new Rook(false);
-                    ImageView pieceImage = createPieceImage(rook);
-                    int finalRow = row;
-                    int finalCol = col;
-                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
-                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
-                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
-                    tile.getChildren().add(pieceImage);
-                }
-
-                if ((row == 7 && col == 0) || (row == 7 && col == 7)) {
-                    Rook rook = new Rook(true);
-                    ImageView pieceImage = createPieceImage(rook);
-                    int finalRow = row;
-                    int finalCol = col;
-                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
-                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
-                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
-                    tile.getChildren().add(pieceImage);
-                }
-
-
+//                if (row == 1) {
+//                    Pawn blackPawn = new Pawn(false);
+//                    ImageView pieceImage = createPieceImage(blackPawn);
+//                    int finalRow = row;
+//                    int finalCol = col;
+//                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
+//                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
+//                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
+//                    tile.getChildren().add(pieceImage);
+//                }
+//
+//                // Place White Pawns
+//                if (row == 6) {
+//                    Pawn whitePawn = new Pawn(true);
+//                    ImageView pieceImage = createPieceImage(whitePawn);
+//                    int finalRow = row;
+//                    int finalCol = col;
+//                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
+//                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
+//                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
+//                    tile.getChildren().add(pieceImage);
+//                }
+//
+//                // Place Rooks
+//                if ((row == 0 && col == 0) || (row == 0 && col == 7)) {
+//                    Rook rook = new Rook(false);
+//                    ImageView pieceImage = createPieceImage(rook);
+//                    int finalRow = row;
+//                    int finalCol = col;
+//                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
+//                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
+//                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
+//                    tile.getChildren().add(pieceImage);
+//                }
+//
+//                if ((row == 7 && col == 0) || (row == 7 && col == 7)) {
+//                    Rook rook = new Rook(true);
+//                    ImageView pieceImage = createPieceImage(rook);
+//                    int finalRow = row;
+//                    int finalCol = col;
+//                    pieceImage.setOnMousePressed(e -> onPiecePressed(e, pieceImage, finalRow, finalCol));
+//                    pieceImage.setOnMouseDragged(e -> onPieceDragged(e, pieceImage));
+//                    pieceImage.setOnMouseReleased(e -> onPieceReleased(e, pieceImage));
+//                    tile.getChildren().add(pieceImage);
+//
                 grid.add(tile, col, row);
             }
         }

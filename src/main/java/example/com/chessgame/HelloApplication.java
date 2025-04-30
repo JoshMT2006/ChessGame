@@ -19,10 +19,9 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Pane root = new Pane(); // This is the main container
-        Game game = new Game(root); // Game draws the board onto root
+        Pane root = new Pane();
+        Game game = new Game(root);
         ChessBoard chessBoard = new ChessBoard();
-
 
         // Create player and computer side labels
         Label playerSide = new Label("Player Side");
@@ -35,8 +34,22 @@ public class HelloApplication extends Application {
         chessBoardContainer.setAlignment(Pos.CENTER);
         chessBoardContainer.getChildren().add(chessBoard.CreateBoard());
 
-        ChessPieces whitePawn = new ChessPieces("/images/WhitePawn.png", 0, 0, new Game(chessBoardContainer));
-        root.getChildren().add(whitePawn);
+        //WhitePawns
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (i == 1) {
+                    ChessPieces blackPawn = new ChessPieces("/images/BlackPawn.png", i, j, new Game(chessBoardContainer));
+                    root.getChildren().add(blackPawn);
+                }
+                if (i == 6) {
+                    ChessPieces whitePawn = new ChessPieces("/images/WhitePawn.png", i, j, new Game(chessBoardContainer));
+                    root.getChildren().add(whitePawn);
+                }
+            }
+
+        }
+
+
 
 
         // HBox for layout
