@@ -1,10 +1,7 @@
 package example.com.chessgame;
 import javafx.scene.image.Image;
 
-public class Pawn extends pieces {
-    private int row;
-    private int col;
-
+public class Pawn extends Piece {
     public Pawn(boolean isWhite) {
         super(isWhite);
     }
@@ -19,30 +16,39 @@ public class Pawn extends pieces {
     }
 
     @Override
-    public boolean validMove(int initialX, int initialY, int finalX, int finalY) {
-        int direction = isWhite ? 1 : -1;
+    public boolean validMove(int initialRow, int initialCol, int finalRow, int finalCol) {
+        int direction = isWhite ? -1 : 1;
 
-        return (finalX == initialX) && (finalY == initialY + direction);
+        //bounds check
+        if (finalRow < 0 || finalRow >= 8 || finalCol < 0 || finalCol >= 8) {
+            return false;
+        }
+        if (initialRow == finalRow && initialCol == finalCol) {
+            return false;
+        }
+
+        Object[][] board = PiecePositions.piecesPositions;
+        Object destination = board[finalRow][finalCol];
+
+        // Move forward one square
+        if (finalCol == initialCol && finalRow == initialRow + direction && destination == null) {
+            return true;
+        }
+
+        if (Math.abs(finalCol - initialCol) == 1 && finalRow == initialRow + direction && destination instanceof ChessPieces) {
+            ChessPieces target = (ChessPieces) destination;
+            boolean result = target.isWhite() != this.isWhite;
+            return result;
+        }
+
+        // First move - two squares forward
+        if ((isWhite && initialRow == 6) || (!isWhite && initialRow == 1)) {
+            if (finalCol == initialCol && finalRow == initialRow + (2 * direction) && destination == null) {
+                int middleRow = initialRow + direction;
+                return board[middleRow][initialCol] == null;
+            }
+        }
+        return false;
     }
-
-    @Override
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    @Override
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    @Override
-    public int getRow() {
-        return row;
-    }
-
-    @Override
-    public int getCol() {
-        return col;
-    }
-
 }
+

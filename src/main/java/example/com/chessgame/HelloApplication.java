@@ -1,27 +1,26 @@
 package example.com.chessgame;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-
-    @Override
     public void start(Stage stage) throws IOException {
-        Pane root = new Pane();
-        Game game = new Game(root);
-        ChessBoard chessBoard = new ChessBoard();
+        Pane boardPane = new Pane();
+        Game game = new Game(boardPane);
+
+        // Initialize static piece positions
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                PiecePositions.piecesPositions[row][col] = null;
+            }
+        }
 
         // Create player and computer side labels
         Label playerSide = new Label("Player Side");
@@ -29,40 +28,39 @@ public class HelloApplication extends Application {
         Label computerSide = new Label("Computer Side");
         computerSide.setStyle("-fx-background-color: #807676; -fx-padding: 20px;");
 
-        // Set container for chess board
-        VBox chessBoardContainer = new VBox();
-        chessBoardContainer.setAlignment(Pos.CENTER);
-        chessBoardContainer.getChildren().add(chessBoard.CreateBoard());
-
-        //WhitePawns
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (i == 1) {
-                    ChessPieces blackPawn = new ChessPieces("/images/BlackPawn.png", i, j, new Game(chessBoardContainer));
-                    root.getChildren().add(blackPawn);
-                }
-                if (i == 6) {
-                    ChessPieces whitePawn = new ChessPieces("/images/WhitePawn.png", i, j, new Game(chessBoardContainer));
-                    root.getChildren().add(whitePawn);
-                }
-            }
-
-        }
-
-
-
+        placePieces(game, boardPane);
 
         // HBox for layout
         HBox BoardGUI = new HBox();
-        BoardGUI.setAlignment(Pos.CENTER);
-        BoardGUI.getChildren().addAll(computerSide, root, playerSide);
+        BoardGUI.getChildren().addAll(computerSide, boardPane, playerSide);
 
         Scene scene = new Scene(BoardGUI, 1000, 1000);
-
-        // Set the scene and show the stage
+        stage.setTitle("Chess Game");
         stage.setScene(scene);
         stage.show();
+    }
 
+    private void placePieces(Game game, Pane root) {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                PiecePositions.piecesPositions[row][col] = null;
+            }
+        }
+        // Initialize black pawns (row 1)
+        for (int col = 0; col < 8; col++) {
+            Pawn blackPawn = new Pawn(false);
+            ChessPieces piece = new ChessPieces(blackPawn, 1, col, game);
+            root.getChildren().add(piece);
+            PiecePositions.setPiece(1, col, piece);
+        }
+
+        // Initialize white pawns (row 6)
+        for (int col = 0; col < 8; col++) {
+            Pawn whitePawn = new Pawn(true);
+            ChessPieces piece = new ChessPieces(whitePawn, 6, col, game);
+            root.getChildren().add(piece);
+            PiecePositions.setPiece(1, col, piece);
+        }
 
     }
 
