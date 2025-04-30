@@ -2,6 +2,8 @@ package example.com.chessgame;
 import javafx.scene.image.Image;
 
 public class Pawn extends pieces {
+    private int row;
+    private int col;
 
     public Pawn(boolean isWhite) {
         super(isWhite);
@@ -22,4 +24,25 @@ public class Pawn extends pieces {
 
         return (finalX == initialX) && (finalY == initialY + direction);
     }
+
+    @Override
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    @Override
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getCol() {
+        return col;
+    }
+
 }

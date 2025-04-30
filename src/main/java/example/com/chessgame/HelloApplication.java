@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -18,31 +19,35 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //creates chess board
+        Pane root = new Pane(); // This is the main container
+        Game game = new Game(root); // Game draws the board onto root
         ChessBoard chessBoard = new ChessBoard();
 
-        //user and computer side labels
+
+        // Create player and computer side labels
         Label playerSide = new Label("Player Side");
         playerSide.setStyle("-fx-background-color: rgba(51,90,119,0.38); -fx-padding: 20px;");
         Label computerSide = new Label("Computer Side");
         computerSide.setStyle("-fx-background-color: #807676; -fx-padding: 20px;");
 
-
-
-
-
-
-
-
-        //setting container for chess board
+        // Set container for chess board
         VBox chessBoardContainer = new VBox();
         chessBoardContainer.setAlignment(Pos.CENTER);
         chessBoardContainer.getChildren().add(chessBoard.CreateBoard());
 
-        HBox BoardGUI = new HBox();
-        BoardGUI.getChildren().addAll(computerSide,chessBoardContainer,playerSide);
+        ChessPieces whitePawn = new ChessPieces("/images/WhitePawn.png", 0, 0, new Game(chessBoardContainer));
+        root.getChildren().add(whitePawn);
 
-        stage.setScene(new Scene(BoardGUI));
+
+        // HBox for layout
+        HBox BoardGUI = new HBox();
+        BoardGUI.setAlignment(Pos.CENTER);
+        BoardGUI.getChildren().addAll(computerSide, root, playerSide);
+
+        Scene scene = new Scene(BoardGUI, 1000, 1000);
+
+        // Set the scene and show the stage
+        stage.setScene(scene);
         stage.show();
 
 

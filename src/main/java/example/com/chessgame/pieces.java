@@ -16,4 +16,9 @@ public abstract class pieces {
 
     public abstract boolean validMove(int initalX , int initalY, int finalX , int finalY);
 
+    public abstract void setRow(int row);
+    public abstract void setCol(int col);
+    public abstract int getRow();
+    public abstract int getCol();
+
 }
