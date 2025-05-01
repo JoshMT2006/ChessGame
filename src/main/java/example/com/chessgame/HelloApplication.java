@@ -61,6 +61,42 @@ public class HelloApplication extends Application {
             root.getChildren().add(piece);
             PiecePositions.setPiece(1, col, piece);
         }
+        //Initialize Rooks
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (col == 0 && row == 0 || col == 7 && row == 0) {
+                    Rook blackRook = new Rook(false);
+                    ChessPieces piece = new ChessPieces(blackRook, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+                if (col == 0 && row == 7 || col == 7 && row == 7) {
+                    Rook whiteRook = new Rook(true);
+                    ChessPieces piece = new ChessPieces(whiteRook, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+            }
+        }
+
+        //Initialize Knights
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (col == 1 && row == 0 || col == 6 && row == 0) {
+                    Knight blackKnight = new Knight(false);
+                    ChessPieces piece = new ChessPieces(blackKnight, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+                if (col == 6 && row == 7 || col == 1 && row == 7) {
+                    Knight blackKnight = new Knight(true);
+                    ChessPieces piece = new ChessPieces(blackKnight, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+            }
+        }
+
 
     }
 

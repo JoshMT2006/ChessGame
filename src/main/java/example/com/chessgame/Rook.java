@@ -18,9 +18,42 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean validMove(int initalX, int initalY, int finalX, int finalY) {
-        return Math.abs(initalX-finalX) == Math.abs(initalY-finalY);
+    public boolean validMove(int initialRow, int initialCol, int finalRow, int finalCol) {
+        if (finalRow < 0 || finalRow >= 8 || finalCol < 0 || finalCol >= 8) {
+            return false;
+        }
+        if (initialRow == finalRow && initialCol == finalCol) {
+            return false;
+        }
+        Object[][] board = PiecePositions.piecesPositions;
+        if (initialRow != finalRow && initialCol != finalCol) {
+            return false;
+        }
+
+        int rowStep = Integer.compare(finalRow, initialRow);
+        int colStep = Integer.compare(finalCol, initialCol);
+        int currentRow = initialRow + rowStep;
+        int currentCol = initialCol + colStep;
+
+        while (currentRow != finalRow || currentCol != finalCol) {
+            if (board[currentRow][currentCol] != null) {
+                return false;
+            }
+            currentRow += rowStep;
+            currentCol += colStep;
+        }
+        Object destination = board[finalRow][finalCol];
+        if (destination == null) {
+            return true;
+        }
+        if (destination instanceof ChessPieces) {
+            ChessPieces target = (ChessPieces) destination;
+            return target.isWhite() != this.isWhite;
+        }
+
+        return false;
     }
+
     @Override
     public void setRow(int row) {
         this.row = row;
@@ -40,4 +73,6 @@ public class Rook extends Piece {
     public int getCol() {
         return col;
     }
+
 }
+
