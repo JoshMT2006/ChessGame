@@ -2,7 +2,7 @@ package example.com.chessgame;
 
 import javafx.scene.image.Image;
 
-public class Queen extends pieces {
+public class Queen extends Piece {
     private int row;
     private int col;
     public Queen (boolean isWhite) {
