@@ -11,8 +11,9 @@ public class Game {
     public static final int SQUARE_SIZE = 90;
     public static final int BOARD_OFFSET_X = 100;
     public static final int BOARD_OFFSET_Y = 100;
-    private boolean isWhiteTurn = true;
+    private boolean isWhiteTurn = false;
     private Label turnLabel;
+    private final GameHistory gameHistory = new GameHistory();
 
     private final Pane root;
 
@@ -70,6 +71,10 @@ public class Game {
 
     public boolean isWhiteTurn() {
         return isWhiteTurn;
+    }
+
+    public GameHistory getGameHistory() {
+        return gameHistory;
     }
 
 }

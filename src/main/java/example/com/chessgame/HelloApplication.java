@@ -124,13 +124,13 @@ public class HelloApplication extends Application {
         //Initialize Queens
         for (int col = 0; col < 8; col++) {
             for (int row = 0; row < 8; row++) {
-                if (col == 3 && row == 0 || col == 4 && row == 0) {
+                if (col == 3 && row == 0) {
                     Queen blackQueen = new Queen(false);
                     ChessPieces piece = new ChessPieces(blackQueen, row, col, game);
                     root.getChildren().add(piece);
                     PiecePositions.setPiece(row, col, piece);
                 }
-                if (col == 4 && row == 7 || col == 3 && row == 7) {
+                if (col == 3 && row == 7) {
                     Queen whiteQueen = new Queen(true);
                     ChessPieces piece = new ChessPieces(whiteQueen, row, col, game);
                     root.getChildren().add(piece);

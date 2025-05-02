@@ -7,11 +7,8 @@ public class GameHistory {
     ArrayList<Integer> moves;
     private int moveCount;
 
-    public GameHistory() {
-        moveCount = 0;
-    }
     public void incrementMoveCount() {
-        moveCount++;
+        moveCount+=1;
     }
     public int getMoveCount() {
         return moveCount;
