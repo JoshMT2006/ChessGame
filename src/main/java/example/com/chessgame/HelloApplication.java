@@ -97,6 +97,59 @@ public class HelloApplication extends Application {
             }
         }
 
+        //Initialize Bishops
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (col == 2 && row == 0 || col == 5 && row == 0) {
+                    Bishop blackBishop = new Bishop(false);
+                    ChessPieces piece = new ChessPieces(blackBishop, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+                if (col == 5 && row == 7 || col == 2 && row == 7) {
+                    Bishop whiteBishop = new Bishop(true);
+                    ChessPieces piece = new ChessPieces(whiteBishop, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+            }
+        }
+
+        //Initialize Queens
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (col == 3 && row == 0 || col == 4 && row == 0) {
+                    Queen blackQueen = new Queen(false);
+                    ChessPieces piece = new ChessPieces(blackQueen, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+                if (col == 4 && row == 7 || col == 3 && row == 7) {
+                    Queen whiteQueen = new Queen(true);
+                    ChessPieces piece = new ChessPieces(whiteQueen, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+            }
+        }
+        //Initialize Kings
+        for (int col = 0; col < 8; col++) {
+            for (int row = 0; row < 8; row++) {
+                if (col == 4 && row == 0) {
+                    King blackKing = new King(false);
+                    ChessPieces piece = new ChessPieces(blackKing, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+                if (col == 4 && row == 7) {
+                    King whiteKing = new King(true);
+                    ChessPieces piece = new ChessPieces(whiteKing, row, col, game);
+                    root.getChildren().add(piece);
+                    PiecePositions.setPiece(row, col, piece);
+                }
+            }
+        }
+
 
     }
 

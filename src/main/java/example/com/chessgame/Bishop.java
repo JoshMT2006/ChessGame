@@ -11,16 +11,51 @@ public class Bishop extends Piece {
     @Override
     public Image getImage(){
         if (isWhite) {
-            return new Image(getClass().getResourceAsStream("/images/WhiteRook.png"));
+            return new Image(getClass().getResourceAsStream("/images/WhiteBishop.png"));
         } else {
-            return new Image(getClass().getResourceAsStream("/images/BlackRook.png"));
+            return new Image(getClass().getResourceAsStream("/images/BlackBishop.png"));
         }
     }
 
     @Override
-    public boolean validMove(int initalX, int initalY, int finalX, int finalY) {
-        return Math.abs(initalX-finalX) == Math.abs(initalY-finalY);
+    public boolean validMove(int initialRow, int initialCol, int finalRow, int finalCol) {
+        if (finalRow < 0 || finalRow >= 8 || finalCol < 0 || finalCol >= 8) {
+            return false;
+        }
+        if (initialRow == finalRow && initialCol == finalCol) {
+            return false;
+        }
+        Object[][] board = PiecePositions.piecesPositions;
+
+        int rowDiff = Math.abs(finalRow - initialRow);
+        int colDiff = Math.abs(finalCol - initialCol);
+        if (rowDiff != colDiff) {
+            return false;
+        }
+
+        int rowStep = (finalRow - initialRow) > 0 ? 1 : -1;
+        int colStep = (finalCol - initialCol) > 0 ? 1 : -1;
+
+        int row = initialRow + rowStep;
+        int col = initialCol + colStep;
+        while (row != finalRow && col != finalCol) {
+            if (board[row][col] != null) {
+                return false; // Path blocked
+            }
+            row += rowStep;
+            col += colStep;
+        }
+        Object destination = board[finalRow][finalCol];
+        if (destination == null) {
+            return true;
+        }
+        if (destination instanceof ChessPieces) {
+            ChessPieces target = (ChessPieces) destination;
+            return target.isWhite() != this.isWhite;
+        }
+        return false;
     }
+
     @Override
     public void setRow(int row) {
         this.row = row;

@@ -10,7 +10,11 @@ public class King extends Piece {
     }
     @Override
     public Image getImage(){
-        return null;
+        if (isWhite) {
+            return new Image(getClass().getResourceAsStream("/images/WhiteKing.png"));
+        } else {
+            return new Image(getClass().getResourceAsStream("/images/BlackKing.png"));
+        }
     }
     @Override
     public boolean validMove(int initalX, int initalY, int finalX, int finalY) {
