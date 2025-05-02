@@ -1,5 +1,6 @@
 package example.com.chessgame;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,13 +11,17 @@ public class Game {
     public static final int SQUARE_SIZE = 90;
     public static final int BOARD_OFFSET_X = 100;
     public static final int BOARD_OFFSET_Y = 100;
+    private boolean isWhiteTurn = true;
+    private Label turnLabel;
 
     private final Pane root;
 
-    public Game(Pane root) {
+    public Game(Pane root, Label turnLabel) {
         this.root = root;
+        this.turnLabel = turnLabel;
         drawBoard();
     }
+
 
     private void drawBoard() {
         // Draw board background
@@ -57,4 +62,14 @@ public class Game {
     public static double getYFromRow(int row) {
         return BOARD_OFFSET_Y + row * SQUARE_SIZE;
     }
+
+    public void switchTurn() {
+        isWhiteTurn = !isWhiteTurn;
+        turnLabel.setText(isWhiteTurn ? "White's Turn" : "Black's Turn");
+    }
+
+    public boolean isWhiteTurn() {
+        return isWhiteTurn;
+    }
+
 }

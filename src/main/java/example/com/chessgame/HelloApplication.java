@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -13,14 +14,16 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Pane boardPane = new Pane();
-        Game game = new Game(boardPane);
-
+        Label turnLabel = new Label();
+        Game game = new Game(boardPane, turnLabel);
         // Initialize static piece positions
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 PiecePositions.piecesPositions[row][col] = null;
             }
         }
+
+        turnLabel.setStyle("-fx-font-size: 18px; -fx-padding: 10px;");
 
         // Create player and computer side labels
         Label playerSide = new Label("Player Side");
@@ -34,7 +37,10 @@ public class HelloApplication extends Application {
         HBox BoardGUI = new HBox();
         BoardGUI.getChildren().addAll(computerSide, boardPane, playerSide);
 
-        Scene scene = new Scene(BoardGUI, 1000, 1000);
+        VBox Layout = new VBox();
+        Layout.getChildren().addAll(turnLabel, BoardGUI);
+
+        Scene scene = new Scene(Layout, 1000, 1000);
         stage.setTitle("Chess Game");
         stage.setScene(scene);
         stage.show();

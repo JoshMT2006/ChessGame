@@ -79,24 +79,26 @@ public class ChessPieces extends ImageView {
 
         newCol = Math.max(0, Math.min(7, newCol));
         newRow = Math.max(0, Math.min(7, newRow));
+        if(piece.isWhite() != game.isWhiteTurn()) {
+            if (piece.validMove(row, col, newRow, newCol)) {
 
-        if (piece.validMove(row, col, newRow, newCol)) {
-            int oldRow = row;
-            int oldCol = col;
+                int oldRow = row;
+                int oldCol = col;
 
-            this.row = newRow;
-            this.col = newCol;
-            piece.setRow(newRow);
-            piece.setCol(newCol);
+                this.row = newRow;
+                this.col = newCol;
+                piece.setRow(newRow);
+                piece.setCol(newCol);
 
-            PiecePositions.movePiece(oldRow, oldCol, newRow, newCol);
-
-        } else {
+                PiecePositions.movePiece(oldRow, oldCol, newRow, newCol);
+                game.switchTurn();
+            }
+        }
+        else {
             this.row = originalRow;
             this.col = originalCol;
         }
         relocateToBoard();
-
     }
 
     public void relocateToBoard() {
