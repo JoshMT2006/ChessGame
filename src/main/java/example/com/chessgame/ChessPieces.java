@@ -15,6 +15,8 @@ public class ChessPieces extends ImageView {
     private double startX, startY;
     private Piece piece;
     private Game game;
+    //Added Turn Counter for use in the futu
+    private final GameHistory gameHistory = new GameHistory();
 
     public ChessPieces(Piece piece, int row, int col, Game game) {
         super(piece.getImage());
@@ -79,7 +81,24 @@ public class ChessPieces extends ImageView {
 
         newCol = Math.max(0, Math.min(7, newCol));
         newRow = Math.max(0, Math.min(7, newRow));
-        if(piece.isWhite() != game.isWhiteTurn()) {
+        if(gameHistory.getMoveCount() == 0) {
+            if(piece.isWhite() == game.isWhiteTurn()) {
+                if (piece.validMove(row, col, newRow, newCol)) {
+                    int oldRow = row;
+                    int oldCol = col;
+
+                    this.row = newRow;
+                    this.col = newCol;
+                    piece.setRow(newRow);
+                    piece.setCol(newCol);
+
+                    PiecePositions.movePiece(oldRow, oldCol, newRow, newCol);
+                    game.switchTurn();
+                    gameHistory.incrementMoveCount();
+                }
+            }
+        }
+        else if(piece.isWhite() != game.isWhiteTurn()) {
             if (piece.validMove(row, col, newRow, newCol)) {
 
                 int oldRow = row;
@@ -92,12 +111,14 @@ public class ChessPieces extends ImageView {
 
                 PiecePositions.movePiece(oldRow, oldCol, newRow, newCol);
                 game.switchTurn();
+                gameHistory.incrementMoveCount();
             }
         }
         else {
             this.row = originalRow;
             this.col = originalCol;
         }
+
         relocateToBoard();
     }
 
