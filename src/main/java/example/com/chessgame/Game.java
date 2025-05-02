@@ -1,5 +1,6 @@
 package example.com.chessgame;
 
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,10 +17,14 @@ public class Game {
     private final GameHistory gameHistory = new GameHistory();
 
     private final Pane root;
+    private final Pane playerSide;
+    private final Pane computerSide;
 
-    public Game(Pane root, Label turnLabel) {
+    public Game(Pane root, Label turnLabel, Pane playerSide1, Pane computerSide1) {
         this.root = root;
         this.turnLabel = turnLabel;
+        this.playerSide = playerSide1;
+        this.computerSide = computerSide1;
         drawBoard();
     }
 
@@ -66,7 +71,7 @@ public class Game {
 
     public void switchTurn() {
         isWhiteTurn = !isWhiteTurn;
-        turnLabel.setText(isWhiteTurn ? "White's Turn" : "Black's Turn");
+        turnLabel.setText(isWhiteTurn ? "Black To Move" : "White To Move");
     }
 
     public boolean isWhiteTurn() {
@@ -75,6 +80,11 @@ public class Game {
 
     public GameHistory getGameHistory() {
         return gameHistory;
+    }
+
+    public void removeCapture(Object piece){
+        root.getChildren().remove(piece);
+
     }
 
 }

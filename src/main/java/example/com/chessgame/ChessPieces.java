@@ -2,9 +2,11 @@ package example.com.chessgame;
 
 
 import javafx.geometry.Point2D;
+import javafx.scene.control.skin.NestedTableColumnHeader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class ChessPieces extends ImageView {
     private int row;
@@ -59,6 +61,10 @@ public class ChessPieces extends ImageView {
         Point2D localPoint = getParent().sceneToLocal(event.getSceneX(), event.getSceneY());
         int newCol = game.getColFromX(localPoint.getX());
         int newRow = game.getRowFromY(localPoint.getY());
+        newCol = Math.max(0, Math.min(7, newCol));
+        newRow = Math.max(0, Math.min(7, newRow));
+
+        ChessPieces target = (ChessPieces) PiecePositions.piecesPositions[newRow][newCol];
 
         if (PiecePositions.piecesPositions[row][col] != this) {
             boolean found = false;
@@ -78,11 +84,24 @@ public class ChessPieces extends ImageView {
             }
         }
 
-        newCol = Math.max(0, Math.min(7, newCol));
-        newRow = Math.max(0, Math.min(7, newRow));
+
         if (piece.isWhite() != game.isWhiteTurn()) {
 
             if (piece.validMove(row, col, newRow, newCol)) {
+                if (target != null && target.piece.isWhite() != piece.isWhite()) {
+                    game.removeCapture(target);
+                    ImageView capturedIcon = new ImageView(target.piece.getImage());
+                    capturedIcon.setFitWidth(30);
+                    capturedIcon.setFitHeight(30);
+                    capturedIcon.setPreserveRatio(true);
+
+                    if (piece.isWhite()) {
+                        HelloApplication.blackCaptured.getChildren().add(capturedIcon);
+                    } else {
+                        HelloApplication.whiteCaptured.getChildren().add(capturedIcon);
+                    }
+
+                }
                 game.getGameHistory().incrementMoveCount();
                 int oldRow = row;
                 int oldCol = col;
@@ -94,7 +113,6 @@ public class ChessPieces extends ImageView {
 
                 PiecePositions.movePiece(oldRow, oldCol, newRow, newCol);
                 game.switchTurn();
-                System.out.println("Move Count: " + game.getGameHistory().getMoveCount() + " is White's Turn " + game.isWhiteTurn());
             }
         }
         else {

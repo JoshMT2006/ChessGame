@@ -4,6 +4,7 @@ package example.com.chessgame;
 public class PiecePositions {
     public static Object[][] piecesPositions = new Object[8][8];
 
+
     public Object getPiece(int row, int col) {
         return piecesPositions[row][col];
     }

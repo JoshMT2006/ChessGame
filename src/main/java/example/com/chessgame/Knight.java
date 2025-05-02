@@ -19,6 +19,7 @@ public class Knight extends Piece {
     }
     @Override
     public boolean validMove(int initialRow, int initialCol, int finalRow, int finalCol) {
+
         if (finalRow < 0 || finalRow >= 8 || finalCol < 0 || finalCol >= 8) {
             return false;
         }

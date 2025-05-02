@@ -30,6 +30,8 @@ public class Pawn extends Piece {
         Object[][] board = PiecePositions.piecesPositions;
         Object destination = board[finalRow][finalCol];
 
+        ChessPieces targetPiece = (ChessPieces) PiecePositions.piecesPositions[finalRow][finalCol];
+
         // Move forward one square
         if (finalCol == initialCol && finalRow == initialRow + direction && destination == null) {
             return true;
