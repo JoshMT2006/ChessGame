@@ -37,10 +37,14 @@ public class Knight extends Piece {
         }
         Object destination = board[finalRow][finalCol];
         if (destination == null) {
+
             return true;
         }
         if (destination instanceof ChessPieces) {
             ChessPieces target = (ChessPieces) destination;
+            if (target.getPiece() instanceof King) {
+                return false;
+            }
             return target.isWhite() != this.isWhite;
         }
         return false;

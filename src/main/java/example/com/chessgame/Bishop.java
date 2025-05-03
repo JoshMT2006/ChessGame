@@ -51,6 +51,9 @@ public class Bishop extends Piece {
         }
         if (destination instanceof ChessPieces) {
             ChessPieces target = (ChessPieces) destination;
+            if (target.getPiece() instanceof King) {
+                return false;
+            }
             return target.isWhite() != this.isWhite;
         }
         return false;

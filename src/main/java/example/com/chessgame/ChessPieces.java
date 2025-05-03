@@ -40,6 +40,9 @@ public class ChessPieces extends ImageView {
         setOnMouseReleased(this::onMouseReleased);
     }
 
+    public Piece getPiece() {
+        return piece;
+    }
     private void onMousePressed(MouseEvent event) {
         mouseX = event.getSceneX();
         mouseY = event.getSceneY();

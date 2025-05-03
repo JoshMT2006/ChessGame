@@ -44,6 +44,9 @@ public class King extends Piece {
             // If destination has a piece of the opposite color
             if (destination instanceof ChessPieces) {
                 ChessPieces target = (ChessPieces) destination;
+                if (target.getPiece() instanceof King) {
+                    return false;
+                }
                 return target.isWhite() != this.isWhite;
             }
         }

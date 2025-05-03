@@ -30,8 +30,6 @@ public class Pawn extends Piece {
         Object[][] board = PiecePositions.piecesPositions;
         Object destination = board[finalRow][finalCol];
 
-        ChessPieces targetPiece = (ChessPieces) PiecePositions.piecesPositions[finalRow][finalCol];
-
         // Move forward one square
         if (finalCol == initialCol && finalRow == initialRow + direction && destination == null) {
             return true;
@@ -39,6 +37,11 @@ public class Pawn extends Piece {
 
         if (Math.abs(finalCol - initialCol) == 1 && finalRow == initialRow + direction && destination instanceof ChessPieces) {
             ChessPieces target = (ChessPieces) destination;
+
+            if (target.getPiece() instanceof King) {
+                return false;
+            }
+
             boolean result = target.isWhite() != this.isWhite;
             return result;
         }
@@ -53,4 +56,5 @@ public class Pawn extends Piece {
         return false;
     }
 }
+
 
